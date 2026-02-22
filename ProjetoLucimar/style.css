@@ -1,0 +1,388 @@
+/* ============================= */
+/* RESET */
+/* ============================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ============================= */
+/* BODY */
+/* ============================= */
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: #5a3d4d;
+  background: #f8f4f6;
+  line-height: 1.6;
+}
+
+/* ============================= */
+/* CONTAINER */
+/* ============================= */
+
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: auto;
+  padding: 60px 0;
+}
+
+/* ============================= */
+/* TÍTULOS */
+/* ============================= */
+
+h1, h2 {
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+h1 {
+  font-size: 28px;
+  color: #fff;
+}
+
+h2 {
+  font-size: 26px;
+  text-align: center;
+  color: #b57a8f;
+}
+
+h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+/* ============================= */
+/* LISTAS */
+/* ============================= */
+
+ul {
+  list-style: none;
+}
+
+ul li {
+  margin-bottom: 10px;
+  padding-left: 20px;
+  position: relative;
+}
+
+ul li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: #c08aa1;
+  font-size: 14px;
+}
+
+/* ============================= */
+/* HERO */
+/* ============================= */
+
+.hero {
+  background: linear-gradient(135deg, #6f3c63, #b57a8f);
+  padding: 80px 0;
+}
+
+.hero-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.hero .text {
+  flex: 1;
+  color: white;
+}
+
+.hero .image img {
+  width: 320px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* ============================= */
+/* SEÇÕES */
+/* ============================= */
+
+/* ============================= */
+/* SEÇÃO MÉTODO LEPSYS PREMIUM */
+/* ============================= */
+
+.section.light {
+  background: linear-gradient(180deg, #f4e6ec 0%, #ead6df 100%);
+  padding: 120px 0;
+  text-align: center;
+  position: relative;
+}
+
+/* leve textura suave */
+.section.light::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.4), transparent 40%),
+              radial-gradient(circle at 80% 70%, rgba(255,255,255,0.3), transparent 40%);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* container acima da textura */
+.section.light .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* TÍTULO */
+.section.light h2 {
+  font-size: 32px;
+  letter-spacing: 2px;
+  color: #9c6476;
+  margin-bottom: 50px;
+}
+
+/* LISTA CENTRALIZADA */
+.section.light .list {
+  max-width: 600px;
+  margin: 0 auto 50px;
+  text-align: left;
+}
+
+/* ITENS */
+.section.light .list li {
+  font-size: 18px;
+  margin-bottom: 20px;
+  padding-left: 40px;
+  position: relative;
+  color: #6d4a58;
+}
+
+/* ÍCONE DOURADO PREMIUM */
+.section.light .list li::before {
+  content: "✦";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  font-size: 16px;
+  color: #c9a24d;
+  text-shadow: 0 0 8px rgba(201,162,77,0.4);
+}
+
+/* PRINCÍPIO */
+.principio {
+  max-width: 750px;
+  margin: 50px auto 0;
+  font-style: italic;
+  font-size: 19px;
+  color: #7a4f5e;
+  line-height: 1.7;
+}
+
+/* FRASE DESTACADA */
+.principio strong {
+  display: block;
+  margin-top: 18px;
+  font-weight: 600;
+  color: #5a2f3e;
+  font-size: 20px;
+}
+
+.section.gradient {
+  background: linear-gradient(135deg, #e8cfd7, #f4e3ea);
+  text-align: center;
+}
+
+.section p {
+  max-width: 700px;
+  margin: 0 auto 20px;
+  text-align: center;
+}
+
+.principio {
+  margin-top: 30px;
+  font-style: italic;
+}
+
+/* Fundo personalizado opcional */
+.back1 {
+  background-image: url("../backgorund1.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* ============================= */
+/* GRID */
+/* ============================= */
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: center;
+}
+
+.grid img {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+/* ============================= */
+/* DEPOIMENTOS */
+/* ============================= */
+
+.depoimentos {
+  background: linear-gradient(135deg, #f3d6df, #e8cfd7);
+  text-align: center;
+  padding: 100px 0;
+  position: relative;
+}
+
+.slider {
+  position: relative;
+  max-width: 700px;
+  margin: 50px auto 0;
+  min-height: 250px;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  opacity: 0;
+  pointer-events: none; /* impede clique quando invisível */
+  transition: opacity 0.6s ease;
+}
+
+.slide.active {
+  opacity: 1;
+  position: relative;
+  pointer-events: auto; /* permite clique no ativo */
+  z-index: 2;
+}
+
+/* Texto */
+.slide p {
+  font-size: 20px;
+  font-style: italic;
+  margin-bottom: 15px;
+}
+
+.slide span {
+  font-weight: 500;
+  color: #6f3c63;
+}
+
+/* Imagem */
+.slide img {
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: contain;
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+
+/* Vídeo */
+.slide video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 15px;
+  background: black;
+}
+
+/* DOTS */
+
+.dots {
+  margin-top: 30px;
+}
+
+.dots button {
+  height: 12px;
+  width: 12px;
+  margin: 0 6px;
+  border-radius: 50%;
+  border: none;
+  background: #c8a6b6;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.dots button.active {
+  background: #6f3c63;
+}
+
+/* ============================= */
+/* FOOTER CTA */
+/* ============================= */
+
+.footer-cta {
+  background: linear-gradient(135deg, #6f3c63, #b57a8f);
+  color: white;
+  text-align: center;
+  padding: 80px 0;
+}
+
+.footer-cta h2 {
+  color: white;
+}
+
+.footer-cta blockquote {
+  margin: 30px 0;
+  font-size: 20px;
+  font-style: italic;
+}
+
+.footer-cta span {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* ============================= */
+/* RESPONSIVO */
+/* ============================= */
+
+@media (max-width: 900px) {
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero .image img {
+    width: 250px;
+  }
+
+  .slider {
+    min-height: 200px;
+  }
+
+  .slide p {
+    font-size: 16px;
+  }
+}
+
+/* ============================= */
+/* PLYR CUSTOM */
+/* ============================= */
+
+.plyr {
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+}
+
+.plyr--video {
+  background: black;
+}
+
+:root {
+  --plyr-color-main: #6f3c63;
+}
