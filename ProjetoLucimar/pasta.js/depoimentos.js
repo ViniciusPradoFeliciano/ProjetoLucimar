@@ -1,112 +1,90 @@
-/* ============================= */
-/* PLYR INIT */
-/* ============================= */
+document.addEventListener("DOMContentLoaded", function () {
 
-const players = Array.from(document.querySelectorAll('.plyr-video')).map(video => {
-  const player = new Plyr(video, {
-    volume: 0.3, // 🔥 volume inicial 30%
-    controls: [
-      'play',
-      'progress',
-      'current-time',
-      'mute',
-      'volume',
-      'fullscreen'
-    ]
-  });
+  let depoimentoIndex = 0;
 
-  // Força volume 30% mesmo se navegador tiver salvo outro
-  player.volume = 0.3;
+  const track = document.querySelector(".depoimentos-track");
+  const items = document.querySelectorAll(".depoimento-item");
+  const btnNext = document.getElementById("nextDepo");
+  const btnPrev = document.getElementById("prevDepo");
 
-  return player;
-});
+  // pega todos os players Plyr
+  const players = Plyr.setup('.plyr-video');
 
-/* ============================= */
-/* SLIDER */
-/* ============================= */
-
-const slides = document.querySelectorAll(".slide");
-const dotsContainer = document.querySelector(".dots");
-
-let current = 0;
-let autoSlide;
-
-/* ============================= */
-/* AUTO SLIDE */
-/* ============================= */
-
-function startAutoSlide() {
-  autoSlide = setInterval(() => {
-    let next = (current + 1) % slides.length;
-    showSlide(next);
-  }, 6000);
-}
-
-function stopAutoSlide() {
-  clearInterval(autoSlide);
-}
-
-/* ============================= */
-/* CRIAR DOTS */
-/* ============================= */
-
-slides.forEach((_, index) => {
-  const dot = document.createElement("button");
-
-  if (index === 0) dot.classList.add("active");
-
-  dot.addEventListener("click", () => {
-    showSlide(index);
-  });
-
-  dotsContainer.appendChild(dot);
-});
-
-const dots = document.querySelectorAll(".dots button");
-
-/* ============================= */
-/* TROCAR SLIDE */
-/* ============================= */
-
-function showSlide(index) {
-
-  // 🔥 Pausa e reseta todos os vídeos
+  function resetAllVideos() {
   players.forEach(player => {
     player.pause();
-    player.currentTime = 0;
+    player.currentTime = 0; // volta para o início
   });
-
-  slides.forEach(slide => slide.classList.remove("active"));
-  dots.forEach(dot => dot.classList.remove("active"));
-
-  slides[index].classList.add("active");
-  dots[index].classList.add("active");
-
-  current = index;
 }
 
-/* ============================= */
-/* EVENTOS DO VÍDEO */
-/* ============================= */
+  function updateCarousel() {
+    track.style.transform = `translateX(-${depoimentoIndex * 100}%)`;
+  }
 
-players.forEach(player => {
-
-  player.on('play', () => {
-    stopAutoSlide(); // 🔥 Para auto-slide ao dar play
+  btnNext.addEventListener("click", function () {
+    resetAllVideos();
+    depoimentoIndex++;
+    if (depoimentoIndex >= items.length) {
+      depoimentoIndex = 0;
+    }
+    updateCarousel();
   });
 
-  player.on('pause', () => {
-    startAutoSlide(); // volta ao pausar
+  btnPrev.addEventListener("click", function () {
+    resetAllVideos();
+    depoimentoIndex--;
+    if (depoimentoIndex < 0) {
+      depoimentoIndex = items.length - 1;
+    }
+    updateCarousel();
   });
 
-  player.on('ended', () => {
-    startAutoSlide(); // volta ao terminar
-  });
 
+ let startX = 0;
+let endX = 0;
+let isSwiping = false;
+
+track.addEventListener("touchstart", function (e) {
+  // evita swipe se tocar no player
+  if (e.target.closest('.plyr')) return;
+
+  startX = e.touches[0].clientX;
+  isSwiping = true;
 });
 
-/* ============================= */
-/* INICIAR */
-/* ============================= */
+track.addEventListener("touchmove", function (e) {
+  if (!isSwiping) return;
+  endX = e.touches[0].clientX;
+});
 
-startAutoSlide();
+track.addEventListener("touchend", function () {
+  if (!isSwiping) return;
+
+  let diff = startX - endX;
+
+  if (Math.abs(diff) > 50) {
+    resetAllVideos();
+
+    if (diff > 0) {
+      // esquerda
+      depoimentoIndex++;
+      if (depoimentoIndex >= items.length) {
+        depoimentoIndex = 0;
+      }
+    } else {
+      // direita
+      depoimentoIndex--;
+      if (depoimentoIndex < 0) {
+        depoimentoIndex = items.length - 1;
+      }
+    }
+
+    updateCarousel();
+  }
+
+  // reset
+  startX = 0;
+  endX = 0;
+  isSwiping = false;
+});
+});
