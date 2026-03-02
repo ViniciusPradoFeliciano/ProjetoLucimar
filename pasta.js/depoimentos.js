@@ -11,11 +11,11 @@ document.addEventListener("DOMContentLoaded", function () {
   const players = Plyr.setup('.plyr-video');
 
   function resetAllVideos() {
-  players.forEach(player => {
-    player.pause();
-    player.currentTime = 0; // volta para o início
-  });
-}
+    players.forEach(player => {
+      player.pause();
+      player.currentTime = 0; // volta para o início
+    });
+  }
 
   function updateCarousel() {
     track.style.transform = `translateX(-${depoimentoIndex * 100}%)`;
@@ -40,51 +40,51 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 
- let startX = 0;
-let endX = 0;
-let isSwiping = false;
+  let startX = 0;
+  let endX = 0;
+  let isSwiping = false;
 
-track.addEventListener("touchstart", function (e) {
-  // evita swipe se tocar no player
-  if (e.target.closest('.plyr')) return;
+  track.addEventListener("touchstart", function (e) {
+    // evita swipe se tocar no player
+    if (e.target.closest('.plyr')) return;
 
-  startX = e.touches[0].clientX;
-  isSwiping = true;
-});
+    startX = e.touches[0].clientX;
+    isSwiping = true;
+  });
 
-track.addEventListener("touchmove", function (e) {
-  if (!isSwiping) return;
-  endX = e.touches[0].clientX;
-});
+  track.addEventListener("touchmove", function (e) {
+    if (!isSwiping) return;
+    endX = e.touches[0].clientX;
+  });
 
-track.addEventListener("touchend", function () {
-  if (!isSwiping) return;
+  track.addEventListener("touchend", function () {
+    if (!isSwiping) return;
 
-  let diff = startX - endX;
+    let diff = startX - endX;
 
-  if (Math.abs(diff) > 50) {
-    resetAllVideos();
+    if (Math.abs(diff) > 50) {
+      resetAllVideos();
 
-    if (diff > 0) {
-      // esquerda
-      depoimentoIndex++;
-      if (depoimentoIndex >= items.length) {
-        depoimentoIndex = 0;
+      if (diff > 0) {
+        // esquerda
+        depoimentoIndex++;
+        if (depoimentoIndex >= items.length) {
+          depoimentoIndex = 0;
+        }
+      } else {
+        // direita
+        depoimentoIndex--;
+        if (depoimentoIndex < 0) {
+          depoimentoIndex = items.length - 1;
+        }
       }
-    } else {
-      // direita
-      depoimentoIndex--;
-      if (depoimentoIndex < 0) {
-        depoimentoIndex = items.length - 1;
-      }
+
+      updateCarousel();
     }
 
-    updateCarousel();
-  }
-
-  // reset
-  startX = 0;
-  endX = 0;
-  isSwiping = false;
-});
+    // reset
+    startX = 0;
+    endX = 0;
+    isSwiping = false;
+  });
 });
