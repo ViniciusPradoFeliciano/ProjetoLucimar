@@ -10,7 +10,7 @@
 /* BODY */
 body {
   font-family: 'Montserrat', sans-serif;
-  background-image: url("../backgorund1.png");
+  background-image: url("/backgorund1.png");
   /* fundo roxo/imagem */
   background-size: cover;
   background-position: center;
